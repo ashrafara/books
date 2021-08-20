@@ -1,0 +1,58 @@
+<div class="row">
+  <div class="col-md-7">
+    <span class="hipster img-fluid rounded"></span>
+  </div>
+
+  <div class="col-md-9" style="text-align: center">
+    <h1 class="display-4"><span>اهلا وسهلا بكم فى موقع  </span> كتاب</h1>
+  </div>
+
+  <div class="col-md-9" style="text-align: right">
+
+
+    <p class="lead">الصفحة الرئيسية</p>
+
+    <div [ngSwitch]="account !== null">
+      <div class="alert alert-success" *ngSwitchCase="true">
+        <span id="home-logged-message" *ngIf="account">انت مسجل فى الصحفة "{{ account.login }}".</span>
+      </div>
+
+      <div class="alert alert-warning" *ngSwitchCase="false">
+        <span>اذا كانت تريد </span>
+        <a class="alert-link" (click)="login()">الدخول</a
+        ><span
+          >, you can try the default accounts:<br />- Administrator (login="admin" and password="admin") <br />- User (login="user" and
+          password="user").</span
+        >
+      </div>
+
+      <div class="alert alert-warning" *ngSwitchCase="false">
+        <span>انت لا تملك حساب ؟</span>&nbsp;
+        <a class="alert-link" routerLink="account/register">سجل ععضو جديد</a>
+      </div>
+    </div>
+
+    <p>اذا لديك اى سؤال يرجي الاتصال </p>
+
+    <ul>
+      <li><a href="https://www.jhipster.tech/" target="_blank" rel="noopener noreferrer">الصفحة الرئيسية</a></li>
+      <li>
+        <a href="https://stackoverflow.com/tags/jhipster/info" target="_blank" rel="noopener noreferrer">JHipster on Stack Overflow</a>
+      </li>
+      <li>
+        <a href="https://github.com/jhipster/generator-jhipster/issues?state=open" target="_blank" rel="noopener noreferrer"
+          >JHipster bug tracker</a
+        >
+      </li>
+      <li>
+        <a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer">JHipster public chat room</a>
+      </li>
+      <li><a href="https://twitter.com/jhipster" target="_blank" rel="noopener noreferrer">follow @jhipster on Twitter</a></li>
+    </ul>
+
+    <p>
+      <span>نحن نرحب بك للعودة مرة اخرى للموقع للاستفادة منه.</span>
+      <a href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer">GitHub</a>!
+    </p>
+  </div>
+</div>

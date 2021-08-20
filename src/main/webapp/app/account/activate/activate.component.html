@@ -1,0 +1,16 @@
+<div>
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h1>Activation</h1>
+
+      <div class="alert alert-success" *ngIf="success">
+        <span><strong>تم تفعيل الحساب نجاح.</strong> Please </span>
+        <a class="alert-link" routerLink="/login">تسجيل الدخول</a>.
+      </div>
+
+      <div class="alert alert-danger" *ngIf="error">
+        <strong>حسابك لم يفعل.</strong> من فضلك سجل فى المنظومة.
+      </div>
+    </div>
+  </div>
+</div>

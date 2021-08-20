@@ -1,0 +1,102 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-book-heading" data-cy="BookCreateUpdateHeading">Create or edit a Book</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_title">Title</label>
+          <input type="text" class="form-control" name="title" id="field_title" data-cy="title" formControlName="title" />
+          <div *ngIf="editForm.get('title')!.invalid && (editForm.get('title')!.dirty || editForm.get('title')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('title')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_isbn">Isbn</label>
+          <input type="text" class="form-control" name="isbn" id="field_isbn" data-cy="isbn" formControlName="isbn" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_bookdate">Bookdate</label>
+          <div class="input-group">
+            <input
+              id="field_bookdate"
+              data-cy="bookdate"
+              type="text"
+              class="form-control"
+              name="bookdate"
+              ngbDatepicker
+              #bookdateDp="ngbDatepicker"
+              formControlName="bookdate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="bookdateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+            </span>
+          </div>
+          <div *ngIf="editForm.get('bookdate')!.invalid && (editForm.get('bookdate')!.dirty || editForm.get('bookdate')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('bookdate')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_distributor">Distributor</label>
+          <input
+            type="text"
+            class="form-control"
+            name="distributor"
+            id="field_distributor"
+            data-cy="distributor"
+            formControlName="distributor"
+          />
+          <div *ngIf="editForm.get('distributor')!.invalid && (editForm.get('distributor')!.dirty || editForm.get('distributor')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('distributor')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_producer">Producer</label>
+          <input type="text" class="form-control" name="producer" id="field_producer" data-cy="producer" formControlName="producer" />
+          <div *ngIf="editForm.get('producer')!.invalid && (editForm.get('producer')!.dirty || editForm.get('producer')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('producer')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="field_authors">Author</label>
+          <select class="form-control" id="field_authors" data-cy="author" multiple name="authors" formControlName="authors">
+            <option
+              [ngValue]="getSelectedAuthor(authorOption, editForm.get('authors')!.value)"
+              *ngFor="let authorOption of authorsSharedCollection; trackBy: trackAuthorById"
+            >
+              {{ authorOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
