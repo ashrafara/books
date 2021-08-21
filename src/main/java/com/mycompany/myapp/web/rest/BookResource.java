@@ -136,6 +136,9 @@ public class BookResource {
                     if (book.getContent() != null) {
                         existingBook.setContent(book.getContent());
                     }
+                    if (book.getLinks() != null) {
+                        existingBook.setLinks(book.getLinks());
+                    }
                     if (book.getBookdate() != null) {
                         existingBook.setBookdate(book.getBookdate());
                     }

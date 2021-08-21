@@ -34,6 +34,9 @@ public class Book implements Serializable {
     @Column(name = "content")
     private String content;
 
+    @Column(name = "links")
+    private String links;
+
     @NotNull
     @Column(name = "bookdate", nullable = false)
     private LocalDate bookdate;
@@ -129,6 +132,19 @@ public class Book implements Serializable {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getLinks() {
+        return this.links;
+    }
+
+    public Book links(String links) {
+        this.links = links;
+        return this;
+    }
+
+    public void setLinks(String links) {
+        this.links = links;
     }
 
     public LocalDate getBookdate() {
@@ -275,6 +291,7 @@ public class Book implements Serializable {
             ", isbn='" + getIsbn() + "'" +
             ", description='" + getDescription() + "'" +
             ", content='" + getContent() + "'" +
+            ", links='" + getLinks() + "'" +
             ", bookdate='" + getBookdate() + "'" +
             ", distributor='" + getDistributor() + "'" +
             ", bookImage='" + getBookImage() + "'" +

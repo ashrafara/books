@@ -42,6 +42,11 @@
         </div>
 
         <div class="form-group">
+          <label class="form-control-label" for="field_links">Links</label>
+          <input type="text" class="form-control" name="links" id="field_links" data-cy="links" formControlName="links" />
+        </div>
+
+        <div class="form-group">
           <label class="form-control-label" for="field_bookdate">Bookdate</label>
           <div class="input-group">
             <input
@@ -153,7 +158,7 @@
               [ngValue]="getSelectedAuthor(authorOption, editForm.get('authors')!.value)"
               *ngFor="let authorOption of authorsSharedCollection; trackBy: trackAuthorById"
             >
-              {{ authorOption.id }}
+              {{ authorOption.fullname }}
             </option>
           </select>
         </div>

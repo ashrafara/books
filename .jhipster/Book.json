@@ -19,6 +19,10 @@
       "fieldType": "String"
     },
     {
+      "fieldName": "links",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "bookdate",
       "fieldType": "LocalDate",
       "fieldValidateRules": ["required"]
