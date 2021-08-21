@@ -11,6 +11,14 @@
       "fieldType": "String"
     },
     {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "content",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "bookdate",
       "fieldType": "LocalDate",
       "fieldValidateRules": ["required"]

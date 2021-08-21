@@ -20,6 +20,12 @@
             <column name="isbn" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="description" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="content" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="bookdate" type="date">
                 <constraints nullable="false" />
             </column>
@@ -77,6 +83,8 @@
             <column name="id" type="numeric"/>
             <column name="title" type="string"/>
             <column name="isbn" type="string"/>
+            <column name="description" type="string"/>
+            <column name="content" type="string"/>
             <column name="bookdate" type="date"/>
             <column name="distributor" type="string"/>
             <column name="book_image" type="blob"/>

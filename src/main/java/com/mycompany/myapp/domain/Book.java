@@ -28,6 +28,12 @@ public class Book implements Serializable {
     @Column(name = "isbn")
     private String isbn;
 
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "content")
+    private String content;
+
     @NotNull
     @Column(name = "bookdate", nullable = false)
     private LocalDate bookdate;
@@ -97,6 +103,32 @@ public class Book implements Serializable {
 
     public void setIsbn(String isbn) {
         this.isbn = isbn;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public Book description(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getContent() {
+        return this.content;
+    }
+
+    public Book content(String content) {
+        this.content = content;
+        return this;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public LocalDate getBookdate() {
@@ -241,6 +273,8 @@ public class Book implements Serializable {
             "id=" + getId() +
             ", title='" + getTitle() + "'" +
             ", isbn='" + getIsbn() + "'" +
+            ", description='" + getDescription() + "'" +
+            ", content='" + getContent() + "'" +
             ", bookdate='" + getBookdate() + "'" +
             ", distributor='" + getDistributor() + "'" +
             ", bookImage='" + getBookImage() + "'" +

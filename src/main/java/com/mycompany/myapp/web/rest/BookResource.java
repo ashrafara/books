@@ -130,6 +130,12 @@ public class BookResource {
                     if (book.getIsbn() != null) {
                         existingBook.setIsbn(book.getIsbn());
                     }
+                    if (book.getDescription() != null) {
+                        existingBook.setDescription(book.getDescription());
+                    }
+                    if (book.getContent() != null) {
+                        existingBook.setContent(book.getContent());
+                    }
                     if (book.getBookdate() != null) {
                         existingBook.setBookdate(book.getBookdate());
                     }

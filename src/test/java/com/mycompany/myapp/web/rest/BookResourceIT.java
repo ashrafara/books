@@ -46,6 +46,12 @@ class BookResourceIT {
     private static final String DEFAULT_ISBN = "AAAAAAAAAA";
     private static final String UPDATED_ISBN = "BBBBBBBBBB";
 
+    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
+    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
+
+    private static final String DEFAULT_CONTENT = "AAAAAAAAAA";
+    private static final String UPDATED_CONTENT = "BBBBBBBBBB";
+
     private static final LocalDate DEFAULT_BOOKDATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_BOOKDATE = LocalDate.now(ZoneId.systemDefault());
 
@@ -95,6 +101,8 @@ class BookResourceIT {
         Book book = new Book()
             .title(DEFAULT_TITLE)
             .isbn(DEFAULT_ISBN)
+            .description(DEFAULT_DESCRIPTION)
+            .content(DEFAULT_CONTENT)
             .bookdate(DEFAULT_BOOKDATE)
             .distributor(DEFAULT_DISTRIBUTOR)
             .bookImage(DEFAULT_BOOK_IMAGE)
@@ -115,6 +123,8 @@ class BookResourceIT {
         Book book = new Book()
             .title(UPDATED_TITLE)
             .isbn(UPDATED_ISBN)
+            .description(UPDATED_DESCRIPTION)
+            .content(UPDATED_CONTENT)
             .bookdate(UPDATED_BOOKDATE)
             .distributor(UPDATED_DISTRIBUTOR)
             .bookImage(UPDATED_BOOK_IMAGE)
@@ -145,6 +155,8 @@ class BookResourceIT {
         Book testBook = bookList.get(bookList.size() - 1);
         assertThat(testBook.getTitle()).isEqualTo(DEFAULT_TITLE);
         assertThat(testBook.getIsbn()).isEqualTo(DEFAULT_ISBN);
+        assertThat(testBook.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testBook.getContent()).isEqualTo(DEFAULT_CONTENT);
         assertThat(testBook.getBookdate()).isEqualTo(DEFAULT_BOOKDATE);
         assertThat(testBook.getDistributor()).isEqualTo(DEFAULT_DISTRIBUTOR);
         assertThat(testBook.getBookImage()).isEqualTo(DEFAULT_BOOK_IMAGE);
@@ -254,6 +266,8 @@ class BookResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(book.getId().intValue())))
             .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE)))
             .andExpect(jsonPath("$.[*].isbn").value(hasItem(DEFAULT_ISBN)))
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
+            .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT)))
             .andExpect(jsonPath("$.[*].bookdate").value(hasItem(DEFAULT_BOOKDATE.toString())))
             .andExpect(jsonPath("$.[*].distributor").value(hasItem(DEFAULT_DISTRIBUTOR)))
             .andExpect(jsonPath("$.[*].bookImageContentType").value(hasItem(DEFAULT_BOOK_IMAGE_CONTENT_TYPE)))
@@ -295,6 +309,8 @@ class BookResourceIT {
             .andExpect(jsonPath("$.id").value(book.getId().intValue()))
             .andExpect(jsonPath("$.title").value(DEFAULT_TITLE))
             .andExpect(jsonPath("$.isbn").value(DEFAULT_ISBN))
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
+            .andExpect(jsonPath("$.content").value(DEFAULT_CONTENT))
             .andExpect(jsonPath("$.bookdate").value(DEFAULT_BOOKDATE.toString()))
             .andExpect(jsonPath("$.distributor").value(DEFAULT_DISTRIBUTOR))
             .andExpect(jsonPath("$.bookImageContentType").value(DEFAULT_BOOK_IMAGE_CONTENT_TYPE))
@@ -326,6 +342,8 @@ class BookResourceIT {
         updatedBook
             .title(UPDATED_TITLE)
             .isbn(UPDATED_ISBN)
+            .description(UPDATED_DESCRIPTION)
+            .content(UPDATED_CONTENT)
             .bookdate(UPDATED_BOOKDATE)
             .distributor(UPDATED_DISTRIBUTOR)
             .bookImage(UPDATED_BOOK_IMAGE)
@@ -348,6 +366,8 @@ class BookResourceIT {
         Book testBook = bookList.get(bookList.size() - 1);
         assertThat(testBook.getTitle()).isEqualTo(UPDATED_TITLE);
         assertThat(testBook.getIsbn()).isEqualTo(UPDATED_ISBN);
+        assertThat(testBook.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testBook.getContent()).isEqualTo(UPDATED_CONTENT);
         assertThat(testBook.getBookdate()).isEqualTo(UPDATED_BOOKDATE);
         assertThat(testBook.getDistributor()).isEqualTo(UPDATED_DISTRIBUTOR);
         assertThat(testBook.getBookImage()).isEqualTo(UPDATED_BOOK_IMAGE);
@@ -425,7 +445,7 @@ class BookResourceIT {
         Book partialUpdatedBook = new Book();
         partialUpdatedBook.setId(book.getId());
 
-        partialUpdatedBook.bookImage(UPDATED_BOOK_IMAGE).bookImageContentType(UPDATED_BOOK_IMAGE_CONTENT_TYPE);
+        partialUpdatedBook.bookdate(UPDATED_BOOKDATE).bookPdf(UPDATED_BOOK_PDF).bookPdfContentType(UPDATED_BOOK_PDF_CONTENT_TYPE);
 
         restBookMockMvc
             .perform(
@@ -441,12 +461,14 @@ class BookResourceIT {
         Book testBook = bookList.get(bookList.size() - 1);
         assertThat(testBook.getTitle()).isEqualTo(DEFAULT_TITLE);
         assertThat(testBook.getIsbn()).isEqualTo(DEFAULT_ISBN);
-        assertThat(testBook.getBookdate()).isEqualTo(DEFAULT_BOOKDATE);
+        assertThat(testBook.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testBook.getContent()).isEqualTo(DEFAULT_CONTENT);
+        assertThat(testBook.getBookdate()).isEqualTo(UPDATED_BOOKDATE);
         assertThat(testBook.getDistributor()).isEqualTo(DEFAULT_DISTRIBUTOR);
-        assertThat(testBook.getBookImage()).isEqualTo(UPDATED_BOOK_IMAGE);
-        assertThat(testBook.getBookImageContentType()).isEqualTo(UPDATED_BOOK_IMAGE_CONTENT_TYPE);
-        assertThat(testBook.getBookPdf()).isEqualTo(DEFAULT_BOOK_PDF);
-        assertThat(testBook.getBookPdfContentType()).isEqualTo(DEFAULT_BOOK_PDF_CONTENT_TYPE);
+        assertThat(testBook.getBookImage()).isEqualTo(DEFAULT_BOOK_IMAGE);
+        assertThat(testBook.getBookImageContentType()).isEqualTo(DEFAULT_BOOK_IMAGE_CONTENT_TYPE);
+        assertThat(testBook.getBookPdf()).isEqualTo(UPDATED_BOOK_PDF);
+        assertThat(testBook.getBookPdfContentType()).isEqualTo(UPDATED_BOOK_PDF_CONTENT_TYPE);
         assertThat(testBook.getProducer()).isEqualTo(DEFAULT_PRODUCER);
     }
 
@@ -465,6 +487,8 @@ class BookResourceIT {
         partialUpdatedBook
             .title(UPDATED_TITLE)
             .isbn(UPDATED_ISBN)
+            .description(UPDATED_DESCRIPTION)
+            .content(UPDATED_CONTENT)
             .bookdate(UPDATED_BOOKDATE)
             .distributor(UPDATED_DISTRIBUTOR)
             .bookImage(UPDATED_BOOK_IMAGE)
@@ -487,6 +511,8 @@ class BookResourceIT {
         Book testBook = bookList.get(bookList.size() - 1);
         assertThat(testBook.getTitle()).isEqualTo(UPDATED_TITLE);
         assertThat(testBook.getIsbn()).isEqualTo(UPDATED_ISBN);
+        assertThat(testBook.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testBook.getContent()).isEqualTo(UPDATED_CONTENT);
         assertThat(testBook.getBookdate()).isEqualTo(UPDATED_BOOKDATE);
         assertThat(testBook.getDistributor()).isEqualTo(UPDATED_DISTRIBUTOR);
         assertThat(testBook.getBookImage()).isEqualTo(UPDATED_BOOK_IMAGE);
