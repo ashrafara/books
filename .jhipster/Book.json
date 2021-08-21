@@ -21,6 +21,16 @@
       "fieldValidateRules": ["required"]
     },
     {
+      "fieldName": "bookImage",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "bookPdf",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
       "fieldName": "producer",
       "fieldType": "String",
       "fieldValidateRules": ["required"]

@@ -7,6 +7,10 @@ export interface IBook {
   isbn?: string | null;
   bookdate?: dayjs.Dayjs;
   distributor?: string;
+  bookImageContentType?: string | null;
+  bookImage?: string | null;
+  bookPdfContentType?: string | null;
+  bookPdf?: string | null;
   producer?: string;
   authors?: IAuthor[] | null;
 }
@@ -18,6 +22,10 @@ export class Book implements IBook {
     public isbn?: string | null,
     public bookdate?: dayjs.Dayjs,
     public distributor?: string,
+    public bookImageContentType?: string | null,
+    public bookImage?: string | null,
+    public bookPdfContentType?: string | null,
+    public bookPdf?: string | null,
     public producer?: string,
     public authors?: IAuthor[] | null
   ) {}

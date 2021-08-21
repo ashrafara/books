@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IBook } from '../book.model';
 import { BookService } from '../service/book.service';
 import { BookDeleteDialogComponent } from '../delete/book-delete-dialog.component';
+import { DataUtils } from 'app/core/util/data-util.service';
 
 @Component({
   selector: 'jhi-book',
@@ -14,7 +15,7 @@ export class BookComponent implements OnInit {
   books?: IBook[];
   isLoading = false;
 
-  constructor(protected bookService: BookService, protected modalService: NgbModal) {}
+  constructor(protected bookService: BookService, protected dataUtils: DataUtils, protected modalService: NgbModal) {}
 
   loadAll(): void {
     this.isLoading = true;
@@ -36,6 +37,14 @@ export class BookComponent implements OnInit {
 
   trackId(index: number, item: IBook): number {
     return item.id!;
+  }
+
+  byteSize(base64String: string): string {
+    return this.dataUtils.byteSize(base64String);
+  }
+
+  openFile(base64String: string, contentType: string | null | undefined): void {
+    return this.dataUtils.openFile(base64String, contentType);
   }
 
   delete(book: IBook): void {

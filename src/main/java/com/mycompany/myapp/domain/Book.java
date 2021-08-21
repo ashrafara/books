@@ -36,6 +36,20 @@ public class Book implements Serializable {
     @Column(name = "distributor", nullable = false)
     private String distributor;
 
+    @Lob
+    @Column(name = "book_image")
+    private byte[] bookImage;
+
+    @Column(name = "book_image_content_type")
+    private String bookImageContentType;
+
+    @Lob
+    @Column(name = "book_pdf")
+    private byte[] bookPdf;
+
+    @Column(name = "book_pdf_content_type")
+    private String bookPdfContentType;
+
     @NotNull
     @Column(name = "producer", nullable = false)
     private String producer;
@@ -111,6 +125,58 @@ public class Book implements Serializable {
         this.distributor = distributor;
     }
 
+    public byte[] getBookImage() {
+        return this.bookImage;
+    }
+
+    public Book bookImage(byte[] bookImage) {
+        this.bookImage = bookImage;
+        return this;
+    }
+
+    public void setBookImage(byte[] bookImage) {
+        this.bookImage = bookImage;
+    }
+
+    public String getBookImageContentType() {
+        return this.bookImageContentType;
+    }
+
+    public Book bookImageContentType(String bookImageContentType) {
+        this.bookImageContentType = bookImageContentType;
+        return this;
+    }
+
+    public void setBookImageContentType(String bookImageContentType) {
+        this.bookImageContentType = bookImageContentType;
+    }
+
+    public byte[] getBookPdf() {
+        return this.bookPdf;
+    }
+
+    public Book bookPdf(byte[] bookPdf) {
+        this.bookPdf = bookPdf;
+        return this;
+    }
+
+    public void setBookPdf(byte[] bookPdf) {
+        this.bookPdf = bookPdf;
+    }
+
+    public String getBookPdfContentType() {
+        return this.bookPdfContentType;
+    }
+
+    public Book bookPdfContentType(String bookPdfContentType) {
+        this.bookPdfContentType = bookPdfContentType;
+        return this;
+    }
+
+    public void setBookPdfContentType(String bookPdfContentType) {
+        this.bookPdfContentType = bookPdfContentType;
+    }
+
     public String getProducer() {
         return this.producer;
     }
@@ -177,6 +243,10 @@ public class Book implements Serializable {
             ", isbn='" + getIsbn() + "'" +
             ", bookdate='" + getBookdate() + "'" +
             ", distributor='" + getDistributor() + "'" +
+            ", bookImage='" + getBookImage() + "'" +
+            ", bookImageContentType='" + getBookImageContentType() + "'" +
+            ", bookPdf='" + getBookPdf() + "'" +
+            ", bookPdfContentType='" + getBookPdfContentType() + "'" +
             ", producer='" + getProducer() + "'" +
             "}";
     }

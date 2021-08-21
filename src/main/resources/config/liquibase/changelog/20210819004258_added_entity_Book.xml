@@ -26,6 +26,18 @@
             <column name="distributor" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
+            <column name="book_image" type="longblob">
+                <constraints nullable="true" />
+            </column>
+            <column name="book_image_content_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="book_pdf" type="longblob">
+                <constraints nullable="true" />
+            </column>
+            <column name="book_pdf_content_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="producer" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
@@ -67,6 +79,10 @@
             <column name="isbn" type="string"/>
             <column name="bookdate" type="date"/>
             <column name="distributor" type="string"/>
+            <column name="book_image" type="blob"/>
+            <column name="book_image_content_type" type="string"/>
+            <column name="book_pdf" type="blob"/>
+            <column name="book_pdf_content_type" type="string"/>
             <column name="producer" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>

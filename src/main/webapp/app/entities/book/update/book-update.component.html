@@ -1,21 +1,21 @@
-<div class="row justify-content-center" style="text-align: right">
+<div class="row justify-content-center">
   <div class="col-8">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="jhi-book-heading" data-cy="BookCreateUpdateHeading">انشاء او تعديل كتاب</h2>
+      <h2 id="jhi-book-heading" data-cy="BookCreateUpdateHeading">Create or edit a Book</h2>
 
       <div>
         <jhi-alert-error></jhi-alert-error>
 
         <div class="form-group" [hidden]="editForm.get('id')!.value == null">
-          <label class="form-control-label" for="field_id">ر.م</label>
+          <label class="form-control-label" for="field_id">ID</label>
           <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" for="field_title">العنوان</label>
+          <label class="form-control-label" for="field_title">Title</label>
           <input type="text" class="form-control" name="title" id="field_title" data-cy="title" formControlName="title" />
           <div *ngIf="editForm.get('title')!.invalid && (editForm.get('title')!.dirty || editForm.get('title')!.touched)">
-            <small class="form-text text-danger" *ngIf="editForm.get('title')?.errors?.required"> هذه الخانة مطلوب. </small>
+            <small class="form-text text-danger" *ngIf="editForm.get('title')?.errors?.required"> This field is required. </small>
           </div>
         </div>
 
@@ -25,7 +25,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" for="field_bookdate">تاريخ الكتاب</label>
+          <label class="form-control-label" for="field_bookdate">Bookdate</label>
           <div class="input-group">
             <input
               id="field_bookdate"
@@ -42,12 +42,12 @@
             </span>
           </div>
           <div *ngIf="editForm.get('bookdate')!.invalid && (editForm.get('bookdate')!.dirty || editForm.get('bookdate')!.touched)">
-            <small class="form-text text-danger" *ngIf="editForm.get('bookdate')?.errors?.required"> هذه الخانة مطلوب. </small>
+            <small class="form-text text-danger" *ngIf="editForm.get('bookdate')?.errors?.required"> This field is required. </small>
           </div>
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" for="field_distributor">الموزعين</label>
+          <label class="form-control-label" for="field_distributor">Distributor</label>
           <input
             type="text"
             class="form-control"
@@ -57,20 +57,80 @@
             formControlName="distributor"
           />
           <div *ngIf="editForm.get('distributor')!.invalid && (editForm.get('distributor')!.dirty || editForm.get('distributor')!.touched)">
-            <small class="form-text text-danger" *ngIf="editForm.get('distributor')?.errors?.required"> Tهذه الخانة مطلوب.</small>
+            <small class="form-text text-danger" *ngIf="editForm.get('distributor')?.errors?.required"> This field is required. </small>
           </div>
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" for="field_producer">المنتجون</label>
+          <label class="form-control-label" for="field_bookImage">Book Image</label>
+          <div>
+            <img
+              [src]="'data:' + editForm.get('bookImageContentType')!.value + ';base64,' + editForm.get('bookImage')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('bookImage')!.value"
+              alt="book image"
+            />
+            <div *ngIf="editForm.get('bookImage')!.value" class="form-text text-danger clearfix">
+              <span class="pull-left"
+                >{{ editForm.get('bookImageContentType')!.value }}, {{ byteSize(editForm.get('bookImage')!.value) }}</span
+              >
+              <button
+                type="button"
+                (click)="clearInputImage('bookImage', 'bookImageContentType', 'file_bookImage')"
+                class="btn btn-secondary btn-xs pull-right"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input type="file" id="file_bookImage" data-cy="bookImage" (change)="setFileData($event, 'bookImage', true)" accept="image/*" />
+          </div>
+          <input type="hidden" class="form-control" name="bookImage" id="field_bookImage" data-cy="bookImage" formControlName="bookImage" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="bookImageContentType"
+            id="field_bookImageContentType"
+            formControlName="bookImageContentType"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_bookPdf">Book Pdf</label>
+          <div>
+            <div *ngIf="editForm.get('bookPdf')!.value" class="form-text text-danger clearfix">
+              <a class="pull-left" (click)="openFile(editForm.get('bookPdf')!.value, editForm.get('bookPdfContentType')!.value)">open</a
+              ><br />
+              <span class="pull-left">{{ editForm.get('bookPdfContentType')!.value }}, {{ byteSize(editForm.get('bookPdf')!.value) }}</span>
+              <button
+                type="button"
+                (click)="editForm.patchValue({ bookPdf: null }); editForm.patchValue({ bookPdfContentType: null })"
+                class="btn btn-secondary btn-xs pull-right"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input type="file" id="file_bookPdf" data-cy="bookPdf" (change)="setFileData($event, 'bookPdf', false)" />
+          </div>
+          <input type="hidden" class="form-control" name="bookPdf" id="field_bookPdf" data-cy="bookPdf" formControlName="bookPdf" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="bookPdfContentType"
+            id="field_bookPdfContentType"
+            formControlName="bookPdfContentType"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_producer">Producer</label>
           <input type="text" class="form-control" name="producer" id="field_producer" data-cy="producer" formControlName="producer" />
           <div *ngIf="editForm.get('producer')!.invalid && (editForm.get('producer')!.dirty || editForm.get('producer')!.touched)">
-            <small class="form-text text-danger" *ngIf="editForm.get('producer')?.errors?.required"> هذه الخانة مطلوب.</small>
+            <small class="form-text text-danger" *ngIf="editForm.get('producer')?.errors?.required"> This field is required. </small>
           </div>
         </div>
 
         <div class="form-group">
-          <label for="field_authors">المؤلفين</label>
+          <label for="field_authors">Author</label>
           <select class="form-control" id="field_authors" data-cy="author" multiple name="authors" formControlName="authors">
             <option
               [ngValue]="getSelectedAuthor(authorOption, editForm.get('authors')!.value)"
@@ -84,7 +144,7 @@
 
       <div>
         <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
-          <fa-icon icon="ban"></fa-icon>&nbsp;<span>الغاء</span>
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
         </button>
 
         <button
@@ -94,7 +154,7 @@
           [disabled]="editForm.invalid || isSaving"
           class="btn btn-primary"
         >
-          <fa-icon icon="save"></fa-icon>&nbsp;<span>حفظ</span>
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
         </button>
       </div>
     </form>

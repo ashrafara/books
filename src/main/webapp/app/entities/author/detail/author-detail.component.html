@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
-  <div class="col-8" style="text-align: right">
+  <div class="col-8">
     <div *ngIf="author">
-      <h2 data-cy="authorDetailsHeading" style="text-align: right"><span>المؤلف</span></h2>
+      <h2 data-cy="authorDetailsHeading"><span>Author</span></h2>
 
       <hr />
 
@@ -10,34 +10,34 @@
       <jhi-alert></jhi-alert>
 
       <dl class="row-md jh-entity-details">
-        <dt><span>ر.م</span></dt>
+        <dt><span>ID</span></dt>
         <dd>
           <span>{{ author.id }}</span>
         </dd>
-        <dt><span>الاسم </span></dt>
+        <dt><span>Fullname</span></dt>
         <dd>
           <span>{{ author.fullname }}</span>
         </dd>
-        <dt><span>رقم الهاتف</span></dt>
+        <dt><span>Phone</span></dt>
         <dd>
           <span>{{ author.phone }}</span>
         </dd>
-        <dt><span>الاقامة</span></dt>
+        <dt><span>Birthdate</span></dt>
         <dd>
           <span>{{ author.birthdate }}</span>
         </dd>
-        <dt><span>البريد الالكتروني</span></dt>
+        <dt><span>Email</span></dt>
         <dd>
           <span>{{ author.email }}</span>
         </dd>
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
-        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>للخلف</span>
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
       </button>
 
       <button type="button" [routerLink]="['/author', author.id, 'edit']" class="btn btn-primary">
-        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>تعديل</span>
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
       </button>
     </div>
   </div>

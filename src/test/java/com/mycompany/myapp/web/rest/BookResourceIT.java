@@ -29,6 +29,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Base64Utils;
 
 /**
  * Integration tests for the {@link BookResource} REST controller.
@@ -50,6 +51,16 @@ class BookResourceIT {
 
     private static final String DEFAULT_DISTRIBUTOR = "AAAAAAAAAA";
     private static final String UPDATED_DISTRIBUTOR = "BBBBBBBBBB";
+
+    private static final byte[] DEFAULT_BOOK_IMAGE = TestUtil.createByteArray(1, "0");
+    private static final byte[] UPDATED_BOOK_IMAGE = TestUtil.createByteArray(1, "1");
+    private static final String DEFAULT_BOOK_IMAGE_CONTENT_TYPE = "image/jpg";
+    private static final String UPDATED_BOOK_IMAGE_CONTENT_TYPE = "image/png";
+
+    private static final byte[] DEFAULT_BOOK_PDF = TestUtil.createByteArray(1, "0");
+    private static final byte[] UPDATED_BOOK_PDF = TestUtil.createByteArray(1, "1");
+    private static final String DEFAULT_BOOK_PDF_CONTENT_TYPE = "image/jpg";
+    private static final String UPDATED_BOOK_PDF_CONTENT_TYPE = "image/png";
 
     private static final String DEFAULT_PRODUCER = "AAAAAAAAAA";
     private static final String UPDATED_PRODUCER = "BBBBBBBBBB";
@@ -86,6 +97,10 @@ class BookResourceIT {
             .isbn(DEFAULT_ISBN)
             .bookdate(DEFAULT_BOOKDATE)
             .distributor(DEFAULT_DISTRIBUTOR)
+            .bookImage(DEFAULT_BOOK_IMAGE)
+            .bookImageContentType(DEFAULT_BOOK_IMAGE_CONTENT_TYPE)
+            .bookPdf(DEFAULT_BOOK_PDF)
+            .bookPdfContentType(DEFAULT_BOOK_PDF_CONTENT_TYPE)
             .producer(DEFAULT_PRODUCER);
         return book;
     }
@@ -102,6 +117,10 @@ class BookResourceIT {
             .isbn(UPDATED_ISBN)
             .bookdate(UPDATED_BOOKDATE)
             .distributor(UPDATED_DISTRIBUTOR)
+            .bookImage(UPDATED_BOOK_IMAGE)
+            .bookImageContentType(UPDATED_BOOK_IMAGE_CONTENT_TYPE)
+            .bookPdf(UPDATED_BOOK_PDF)
+            .bookPdfContentType(UPDATED_BOOK_PDF_CONTENT_TYPE)
             .producer(UPDATED_PRODUCER);
         return book;
     }
@@ -128,6 +147,10 @@ class BookResourceIT {
         assertThat(testBook.getIsbn()).isEqualTo(DEFAULT_ISBN);
         assertThat(testBook.getBookdate()).isEqualTo(DEFAULT_BOOKDATE);
         assertThat(testBook.getDistributor()).isEqualTo(DEFAULT_DISTRIBUTOR);
+        assertThat(testBook.getBookImage()).isEqualTo(DEFAULT_BOOK_IMAGE);
+        assertThat(testBook.getBookImageContentType()).isEqualTo(DEFAULT_BOOK_IMAGE_CONTENT_TYPE);
+        assertThat(testBook.getBookPdf()).isEqualTo(DEFAULT_BOOK_PDF);
+        assertThat(testBook.getBookPdfContentType()).isEqualTo(DEFAULT_BOOK_PDF_CONTENT_TYPE);
         assertThat(testBook.getProducer()).isEqualTo(DEFAULT_PRODUCER);
     }
 
@@ -233,6 +256,10 @@ class BookResourceIT {
             .andExpect(jsonPath("$.[*].isbn").value(hasItem(DEFAULT_ISBN)))
             .andExpect(jsonPath("$.[*].bookdate").value(hasItem(DEFAULT_BOOKDATE.toString())))
             .andExpect(jsonPath("$.[*].distributor").value(hasItem(DEFAULT_DISTRIBUTOR)))
+            .andExpect(jsonPath("$.[*].bookImageContentType").value(hasItem(DEFAULT_BOOK_IMAGE_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].bookImage").value(hasItem(Base64Utils.encodeToString(DEFAULT_BOOK_IMAGE))))
+            .andExpect(jsonPath("$.[*].bookPdfContentType").value(hasItem(DEFAULT_BOOK_PDF_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].bookPdf").value(hasItem(Base64Utils.encodeToString(DEFAULT_BOOK_PDF))))
             .andExpect(jsonPath("$.[*].producer").value(hasItem(DEFAULT_PRODUCER)));
     }
 
@@ -270,6 +297,10 @@ class BookResourceIT {
             .andExpect(jsonPath("$.isbn").value(DEFAULT_ISBN))
             .andExpect(jsonPath("$.bookdate").value(DEFAULT_BOOKDATE.toString()))
             .andExpect(jsonPath("$.distributor").value(DEFAULT_DISTRIBUTOR))
+            .andExpect(jsonPath("$.bookImageContentType").value(DEFAULT_BOOK_IMAGE_CONTENT_TYPE))
+            .andExpect(jsonPath("$.bookImage").value(Base64Utils.encodeToString(DEFAULT_BOOK_IMAGE)))
+            .andExpect(jsonPath("$.bookPdfContentType").value(DEFAULT_BOOK_PDF_CONTENT_TYPE))
+            .andExpect(jsonPath("$.bookPdf").value(Base64Utils.encodeToString(DEFAULT_BOOK_PDF)))
             .andExpect(jsonPath("$.producer").value(DEFAULT_PRODUCER));
     }
 
@@ -297,6 +328,10 @@ class BookResourceIT {
             .isbn(UPDATED_ISBN)
             .bookdate(UPDATED_BOOKDATE)
             .distributor(UPDATED_DISTRIBUTOR)
+            .bookImage(UPDATED_BOOK_IMAGE)
+            .bookImageContentType(UPDATED_BOOK_IMAGE_CONTENT_TYPE)
+            .bookPdf(UPDATED_BOOK_PDF)
+            .bookPdfContentType(UPDATED_BOOK_PDF_CONTENT_TYPE)
             .producer(UPDATED_PRODUCER);
 
         restBookMockMvc
@@ -315,6 +350,10 @@ class BookResourceIT {
         assertThat(testBook.getIsbn()).isEqualTo(UPDATED_ISBN);
         assertThat(testBook.getBookdate()).isEqualTo(UPDATED_BOOKDATE);
         assertThat(testBook.getDistributor()).isEqualTo(UPDATED_DISTRIBUTOR);
+        assertThat(testBook.getBookImage()).isEqualTo(UPDATED_BOOK_IMAGE);
+        assertThat(testBook.getBookImageContentType()).isEqualTo(UPDATED_BOOK_IMAGE_CONTENT_TYPE);
+        assertThat(testBook.getBookPdf()).isEqualTo(UPDATED_BOOK_PDF);
+        assertThat(testBook.getBookPdfContentType()).isEqualTo(UPDATED_BOOK_PDF_CONTENT_TYPE);
         assertThat(testBook.getProducer()).isEqualTo(UPDATED_PRODUCER);
     }
 
@@ -386,7 +425,7 @@ class BookResourceIT {
         Book partialUpdatedBook = new Book();
         partialUpdatedBook.setId(book.getId());
 
-        partialUpdatedBook.producer(UPDATED_PRODUCER);
+        partialUpdatedBook.bookImage(UPDATED_BOOK_IMAGE).bookImageContentType(UPDATED_BOOK_IMAGE_CONTENT_TYPE);
 
         restBookMockMvc
             .perform(
@@ -404,7 +443,11 @@ class BookResourceIT {
         assertThat(testBook.getIsbn()).isEqualTo(DEFAULT_ISBN);
         assertThat(testBook.getBookdate()).isEqualTo(DEFAULT_BOOKDATE);
         assertThat(testBook.getDistributor()).isEqualTo(DEFAULT_DISTRIBUTOR);
-        assertThat(testBook.getProducer()).isEqualTo(UPDATED_PRODUCER);
+        assertThat(testBook.getBookImage()).isEqualTo(UPDATED_BOOK_IMAGE);
+        assertThat(testBook.getBookImageContentType()).isEqualTo(UPDATED_BOOK_IMAGE_CONTENT_TYPE);
+        assertThat(testBook.getBookPdf()).isEqualTo(DEFAULT_BOOK_PDF);
+        assertThat(testBook.getBookPdfContentType()).isEqualTo(DEFAULT_BOOK_PDF_CONTENT_TYPE);
+        assertThat(testBook.getProducer()).isEqualTo(DEFAULT_PRODUCER);
     }
 
     @Test
@@ -424,6 +467,10 @@ class BookResourceIT {
             .isbn(UPDATED_ISBN)
             .bookdate(UPDATED_BOOKDATE)
             .distributor(UPDATED_DISTRIBUTOR)
+            .bookImage(UPDATED_BOOK_IMAGE)
+            .bookImageContentType(UPDATED_BOOK_IMAGE_CONTENT_TYPE)
+            .bookPdf(UPDATED_BOOK_PDF)
+            .bookPdfContentType(UPDATED_BOOK_PDF_CONTENT_TYPE)
             .producer(UPDATED_PRODUCER);
 
         restBookMockMvc
@@ -442,6 +489,10 @@ class BookResourceIT {
         assertThat(testBook.getIsbn()).isEqualTo(UPDATED_ISBN);
         assertThat(testBook.getBookdate()).isEqualTo(UPDATED_BOOKDATE);
         assertThat(testBook.getDistributor()).isEqualTo(UPDATED_DISTRIBUTOR);
+        assertThat(testBook.getBookImage()).isEqualTo(UPDATED_BOOK_IMAGE);
+        assertThat(testBook.getBookImageContentType()).isEqualTo(UPDATED_BOOK_IMAGE_CONTENT_TYPE);
+        assertThat(testBook.getBookPdf()).isEqualTo(UPDATED_BOOK_PDF);
+        assertThat(testBook.getBookPdfContentType()).isEqualTo(UPDATED_BOOK_PDF_CONTENT_TYPE);
         assertThat(testBook.getProducer()).isEqualTo(UPDATED_PRODUCER);
     }
 

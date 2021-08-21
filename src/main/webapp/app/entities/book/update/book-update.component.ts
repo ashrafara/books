@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -7,6 +7,9 @@ import { finalize, map } from 'rxjs/operators';
 
 import { IBook, Book } from '../book.model';
 import { BookService } from '../service/book.service';
+import { AlertError } from 'app/shared/alert/alert-error.model';
+import { EventManager, EventWithContent } from 'app/core/util/event-manager.service';
+import { DataUtils, FileLoadError } from 'app/core/util/data-util.service';
 import { IAuthor } from 'app/entities/author/author.model';
 import { AuthorService } from 'app/entities/author/service/author.service';
 
@@ -25,13 +28,20 @@ export class BookUpdateComponent implements OnInit {
     isbn: [],
     bookdate: [null, [Validators.required]],
     distributor: [null, [Validators.required]],
+    bookImage: [],
+    bookImageContentType: [],
+    bookPdf: [],
+    bookPdfContentType: [],
     producer: [null, [Validators.required]],
     authors: [],
   });
 
   constructor(
+    protected dataUtils: DataUtils,
+    protected eventManager: EventManager,
     protected bookService: BookService,
     protected authorService: AuthorService,
+    protected elementRef: ElementRef,
     protected activatedRoute: ActivatedRoute,
     protected fb: FormBuilder
   ) {}
@@ -42,6 +52,31 @@ export class BookUpdateComponent implements OnInit {
 
       this.loadRelationshipsOptions();
     });
+  }
+
+  byteSize(base64String: string): string {
+    return this.dataUtils.byteSize(base64String);
+  }
+
+  openFile(base64String: string, contentType: string | null | undefined): void {
+    this.dataUtils.openFile(base64String, contentType);
+  }
+
+  setFileData(event: Event, field: string, isImage: boolean): void {
+    this.dataUtils.loadFileToForm(event, this.editForm, field, isImage).subscribe({
+      error: (err: FileLoadError) =>
+        this.eventManager.broadcast(new EventWithContent<AlertError>('boksApp.error', { message: err.message })),
+    });
+  }
+
+  clearInputImage(field: string, fieldContentType: string, idInput: string): void {
+    this.editForm.patchValue({
+      [field]: null,
+      [fieldContentType]: null,
+    });
+    if (idInput && this.elementRef.nativeElement.querySelector('#' + idInput)) {
+      this.elementRef.nativeElement.querySelector('#' + idInput).value = null;
+    }
   }
 
   previousState(): void {
@@ -99,6 +134,10 @@ export class BookUpdateComponent implements OnInit {
       isbn: book.isbn,
       bookdate: book.bookdate,
       distributor: book.distributor,
+      bookImage: book.bookImage,
+      bookImageContentType: book.bookImageContentType,
+      bookPdf: book.bookPdf,
+      bookPdfContentType: book.bookPdfContentType,
       producer: book.producer,
       authors: book.authors,
     });
@@ -126,6 +165,10 @@ export class BookUpdateComponent implements OnInit {
       isbn: this.editForm.get(['isbn'])!.value,
       bookdate: this.editForm.get(['bookdate'])!.value,
       distributor: this.editForm.get(['distributor'])!.value,
+      bookImageContentType: this.editForm.get(['bookImageContentType'])!.value,
+      bookImage: this.editForm.get(['bookImage'])!.value,
+      bookPdfContentType: this.editForm.get(['bookPdfContentType'])!.value,
+      bookPdf: this.editForm.get(['bookPdf'])!.value,
       producer: this.editForm.get(['producer'])!.value,
       authors: this.editForm.get(['authors'])!.value,
     };

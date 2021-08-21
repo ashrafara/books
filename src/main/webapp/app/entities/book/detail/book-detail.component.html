@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
-  <div class="col-8" style="text-align: right">
+  <div class="col-8">
     <div *ngIf="book">
-      <h2 data-cy="bookDetailsHeading"><span>الكتب</span></h2>
+      <h2 data-cy="bookDetailsHeading"><span>Book</span></h2>
 
       <hr />
 
@@ -9,12 +9,12 @@
 
       <jhi-alert></jhi-alert>
 
-      <dl class="row-md jh-entity-details" style="text-align: right">
-        <dt><span>ر.م</span></dt>
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
         <dd>
           <span>{{ book.id }}</span>
         </dd>
-        <dt><span>العنوان</span></dt>
+        <dt><span>Title</span></dt>
         <dd>
           <span>{{ book.title }}</span>
         </dd>
@@ -22,19 +22,35 @@
         <dd>
           <span>{{ book.isbn }}</span>
         </dd>
-        <dt><span>تاريخ الكتاب</span></dt>
+        <dt><span>Bookdate</span></dt>
         <dd>
           <span>{{ book.bookdate | formatMediumDate }}</span>
         </dd>
-        <dt><span>الموزعين</span></dt>
+        <dt><span>Distributor</span></dt>
         <dd>
           <span>{{ book.distributor }}</span>
         </dd>
-        <dt><span>المنتجين</span></dt>
+        <dt><span>Book Image</span></dt>
+        <dd>
+          <div *ngIf="book.bookImage">
+            <a (click)="openFile(book.bookImage, book.bookImageContentType)">
+              <img [src]="'data:' + book.bookImageContentType + ';base64,' + book.bookImage" style="max-width: 100%" alt="book image" />
+            </a>
+            {{ book.bookImageContentType }}, {{ byteSize(book.bookImage) }}
+          </div>
+        </dd>
+        <dt><span>Book Pdf</span></dt>
+        <dd>
+          <div *ngIf="book.bookPdf">
+            <a (click)="openFile(book.bookPdf, book.bookPdfContentType)">open</a>
+            {{ book.bookPdfContentType }}, {{ byteSize(book.bookPdf) }}
+          </div>
+        </dd>
+        <dt><span>Producer</span></dt>
         <dd>
           <span>{{ book.producer }}</span>
         </dd>
-        <dt><span>المؤلفين</span></dt>
+        <dt><span>Author</span></dt>
         <dd>
           <span *ngFor="let author of book.authors; let last = last">
             <a [routerLink]="['/author', author?.id, 'view']">{{ author.id }}</a
@@ -44,11 +60,11 @@
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
-        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>للخلف</span>
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
       </button>
 
       <button type="button" [routerLink]="['/book', book.id, 'edit']" class="btn btn-primary">
-        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>تعــديل</span>
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
       </button>
     </div>
   </div>

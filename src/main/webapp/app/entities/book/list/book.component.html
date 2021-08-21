@@ -1,11 +1,11 @@
-<div style="text-align: right">
+<div>
   <h2 id="page-heading" data-cy="BookHeading">
     <span>Books</span>
 
     <div class="d-flex justify-content-end">
       <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span>تهيئة الجدول</span>
+        <span>Refresh List</span>
       </button>
 
       <button
@@ -15,7 +15,7 @@
         [routerLink]="['/book/new']"
       >
         <fa-icon icon="plus"></fa-icon>
-        <span> انشاء كتاب جديد </span>
+        <span> Create a new Book </span>
       </button>
     </div>
   </h2>
@@ -25,20 +25,22 @@
   <jhi-alert></jhi-alert>
 
   <div class="alert alert-warning" id="no-result" *ngIf="books?.length === 0">
-    <span>لا يوجد كتب</span>
+    <span>No books found</span>
   </div>
 
   <div class="table-responsive" id="entities" *ngIf="books && books.length > 0">
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr>
-          <th scope="col"><span>ر.م</span></th>
-          <th scope="col"><span>العنوان</span></th>
+          <th scope="col"><span>ID</span></th>
+          <th scope="col"><span>Title</span></th>
           <th scope="col"><span>Isbn</span></th>
-          <th scope="col"><span>تاريخ الكتاب</span></th>
-          <th scope="col"><span>الموزعين</span></th>
-          <th scope="col"><span>المنتجين</span></th>
-          <th scope="col"><span>المؤلفين</span></th>
+          <th scope="col"><span>Bookdate</span></th>
+          <th scope="col"><span>Distributor</span></th>
+          <th scope="col"><span>Book Image</span></th>
+          <th scope="col"><span>Book Pdf</span></th>
+          <th scope="col"><span>Producer</span></th>
+          <th scope="col"><span>Author</span></th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -51,6 +53,16 @@
           <td>{{ book.isbn }}</td>
           <td>{{ book.bookdate | formatMediumDate }}</td>
           <td>{{ book.distributor }}</td>
+          <td>
+            <a *ngIf="book.bookImage" (click)="openFile(book.bookImage, book.bookImageContentType)">
+              <img [src]="'data:' + book.bookImageContentType + ';base64,' + book.bookImage" style="max-height: 30px" alt="book image" />
+            </a>
+            <span *ngIf="book.bookImage">{{ book.bookImageContentType }}, {{ byteSize(book.bookImage) }}</span>
+          </td>
+          <td>
+            <a *ngIf="book.bookPdf" (click)="openFile(book.bookPdf, book.bookPdfContentType)">open</a>
+            <span *ngIf="book.bookPdf">{{ book.bookPdfContentType }}, {{ byteSize(book.bookPdf) }}</span>
+          </td>
           <td>{{ book.producer }}</td>
           <td>
             <span *ngFor="let author of book.authors; let last = last">
@@ -62,17 +74,17 @@
             <div class="btn-group">
               <button type="submit" [routerLink]="['/book', book.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
                 <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline">عرض</span>
+                <span class="d-none d-md-inline">View</span>
               </button>
 
               <button type="submit" [routerLink]="['/book', book.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
                 <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline">تعديل</span>
+                <span class="d-none d-md-inline">Edit</span>
               </button>
 
               <button type="submit" (click)="delete(book)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
                 <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline">حذف</span>
+                <span class="d-none d-md-inline">Delete</span>
               </button>
             </div>
           </td>

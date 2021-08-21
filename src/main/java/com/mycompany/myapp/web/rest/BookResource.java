@@ -136,6 +136,18 @@ public class BookResource {
                     if (book.getDistributor() != null) {
                         existingBook.setDistributor(book.getDistributor());
                     }
+                    if (book.getBookImage() != null) {
+                        existingBook.setBookImage(book.getBookImage());
+                    }
+                    if (book.getBookImageContentType() != null) {
+                        existingBook.setBookImageContentType(book.getBookImageContentType());
+                    }
+                    if (book.getBookPdf() != null) {
+                        existingBook.setBookPdf(book.getBookPdf());
+                    }
+                    if (book.getBookPdfContentType() != null) {
+                        existingBook.setBookPdfContentType(book.getBookPdfContentType());
+                    }
                     if (book.getProducer() != null) {
                         existingBook.setProducer(book.getProducer());
                     }

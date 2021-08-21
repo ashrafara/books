@@ -30,6 +30,10 @@ describe('Service Tests', () => {
         isbn: 'AAAAAAA',
         bookdate: currentDate,
         distributor: 'AAAAAAA',
+        bookImageContentType: 'image/png',
+        bookImage: 'AAAAAAA',
+        bookPdfContentType: 'image/png',
+        bookPdf: 'AAAAAAA',
         producer: 'AAAAAAA',
       };
     });
@@ -81,6 +85,8 @@ describe('Service Tests', () => {
             isbn: 'BBBBBB',
             bookdate: currentDate.format(DATE_FORMAT),
             distributor: 'BBBBBB',
+            bookImage: 'BBBBBB',
+            bookPdf: 'BBBBBB',
             producer: 'BBBBBB',
           },
           elemDefault
@@ -134,6 +140,8 @@ describe('Service Tests', () => {
             isbn: 'BBBBBB',
             bookdate: currentDate.format(DATE_FORMAT),
             distributor: 'BBBBBB',
+            bookImage: 'BBBBBB',
+            bookPdf: 'BBBBBB',
             producer: 'BBBBBB',
           },
           elemDefault
@@ -191,7 +199,7 @@ describe('Service Tests', () => {
         });
 
         it('should add only unique Book to an array', () => {
-          const bookArray: IBook[] = [{ id: 123 }, { id: 456 }, { id: 574 }];
+          const bookArray: IBook[] = [{ id: 123 }, { id: 456 }, { id: 20703 }];
           const bookCollection: IBook[] = [{ id: 123 }];
           expectedResult = service.addBookToCollectionIfMissing(bookCollection, ...bookArray);
           expect(expectedResult).toHaveLength(3);
