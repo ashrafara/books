@@ -1,11 +1,11 @@
-<div>
+<div style="text-align: right">
   <h2 id="page-heading" data-cy="BookHeading">
     <span>Books</span>
 
     <div class="d-flex justify-content-end">
       <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span>Refresh List</span>
+        <span>تهيئة الجدول</span>
       </button>
 
       <button
@@ -15,7 +15,7 @@
         [routerLink]="['/book/new']"
       >
         <fa-icon icon="plus"></fa-icon>
-        <span> Create a new Book </span>
+        <span> انشاء كتاب جديد </span>
       </button>
     </div>
   </h2>
@@ -25,20 +25,20 @@
   <jhi-alert></jhi-alert>
 
   <div class="alert alert-warning" id="no-result" *ngIf="books?.length === 0">
-    <span>No books found</span>
+    <span>لا يوجد كتب</span>
   </div>
 
   <div class="table-responsive" id="entities" *ngIf="books && books.length > 0">
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr>
-          <th scope="col"><span>ID</span></th>
-          <th scope="col"><span>Title</span></th>
+          <th scope="col"><span>ر.م</span></th>
+          <th scope="col"><span>العنوان</span></th>
           <th scope="col"><span>Isbn</span></th>
-          <th scope="col"><span>Bookdate</span></th>
-          <th scope="col"><span>Distributor</span></th>
-          <th scope="col"><span>Producer</span></th>
-          <th scope="col"><span>Author</span></th>
+          <th scope="col"><span>تاريخ الكتاب</span></th>
+          <th scope="col"><span>الموزعين</span></th>
+          <th scope="col"><span>المنتجين</span></th>
+          <th scope="col"><span>المؤلفين</span></th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -62,17 +62,17 @@
             <div class="btn-group">
               <button type="submit" [routerLink]="['/book', book.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
                 <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline">View</span>
+                <span class="d-none d-md-inline">عرض</span>
               </button>
 
               <button type="submit" [routerLink]="['/book', book.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
                 <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline">Edit</span>
+                <span class="d-none d-md-inline">تعديل</span>
               </button>
 
               <button type="submit" (click)="delete(book)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
                 <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline">Delete</span>
+                <span class="d-none d-md-inline">حذف</span>
               </button>
             </div>
           </td>

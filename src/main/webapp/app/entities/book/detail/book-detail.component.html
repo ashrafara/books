@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
-  <div class="col-8">
+  <div class="col-8" style="text-align: right">
     <div *ngIf="book">
-      <h2 data-cy="bookDetailsHeading"><span>Book</span></h2>
+      <h2 data-cy="bookDetailsHeading"><span>الكتب</span></h2>
 
       <hr />
 
@@ -9,12 +9,12 @@
 
       <jhi-alert></jhi-alert>
 
-      <dl class="row-md jh-entity-details">
-        <dt><span>ID</span></dt>
+      <dl class="row-md jh-entity-details" style="text-align: right">
+        <dt><span>ر.م</span></dt>
         <dd>
           <span>{{ book.id }}</span>
         </dd>
-        <dt><span>Title</span></dt>
+        <dt><span>العنوان</span></dt>
         <dd>
           <span>{{ book.title }}</span>
         </dd>
@@ -22,19 +22,19 @@
         <dd>
           <span>{{ book.isbn }}</span>
         </dd>
-        <dt><span>Bookdate</span></dt>
+        <dt><span>تاريخ الكتاب</span></dt>
         <dd>
           <span>{{ book.bookdate | formatMediumDate }}</span>
         </dd>
-        <dt><span>Distributor</span></dt>
+        <dt><span>الموزعين</span></dt>
         <dd>
           <span>{{ book.distributor }}</span>
         </dd>
-        <dt><span>Producer</span></dt>
+        <dt><span>المنتجين</span></dt>
         <dd>
           <span>{{ book.producer }}</span>
         </dd>
-        <dt><span>Author</span></dt>
+        <dt><span>المؤلفين</span></dt>
         <dd>
           <span *ngFor="let author of book.authors; let last = last">
             <a [routerLink]="['/author', author?.id, 'view']">{{ author.id }}</a
@@ -44,11 +44,11 @@
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
-        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>للخلف</span>
       </button>
 
       <button type="button" [routerLink]="['/book', book.id, 'edit']" class="btn btn-primary">
-        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>تعديل</span>
       </button>
     </div>
   </div>
