@@ -70,7 +70,7 @@
           <td>{{ book.producer }}</td>
           <td>
             <span *ngFor="let author of book.authors; let last = last">
-              <a class="form-control-static" [routerLink]="['/author', author.id, 'view']">{{ author.id }}</a
+              <a class="form-control-static" [routerLink]="['/author', author.id, 'view']">{{ author.fullname }}</a
               >{{ last ? '' : ', ' }}
             </span>
           </td>
