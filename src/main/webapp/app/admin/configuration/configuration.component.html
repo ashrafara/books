@@ -1,4 +1,4 @@
-<div *ngIf="allBeans">
+<div *ngIf="allBeans" style="text-align: right">
   <h2 id="configuration-page-heading" data-cy="configurationPageHeading">Configuration</h2>
 
   <span>Filter (by prefix)</span>
@@ -10,7 +10,7 @@
     <thead>
       <tr jhiSort predicate="prefix" [(ascending)]="beansAscending" [callback]="filterAndSortBeans.bind(this)">
         <th jhiSortBy="prefix" scope="col" class="w-40"><span>Prefix</span> <fa-icon icon="sort"></fa-icon></th>
-        <th scope="col" class="w-60"><span>Properties</span></th>
+        <th scope="col" class="w-60"><span>الخصائص</span></th>
       </tr>
     </thead>
     <tbody>

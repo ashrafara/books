@@ -1,8 +1,8 @@
 <div>
-  <div class="row justify-content-center">
+  <div class="row justify-content-center" style="text-align: right">
     <div class="col-md-8">
       <h2 *ngIf="account">
-        User settings for [<strong>{{ account.login }}</strong
+        الاعدادات  [<strong>{{ account.login }}</strong
         >]
       </h2>
 
@@ -14,7 +14,7 @@
 
       <form name="form" role="form" (ngSubmit)="save()" [formGroup]="settingsForm" *ngIf="account" novalidate>
         <div class="form-group">
-          <label class="form-control-label" for="firstName">First Name</label>
+          <label class="form-control-label" for="firstName"> الاسم</label>
           <input
             type="text"
             class="form-control"
@@ -45,7 +45,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" for="lastName">Last Name</label>
+          <label class="form-control-label" for="lastName">اللقب</label>
           <input
             type="text"
             class="form-control"
@@ -74,7 +74,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" for="email">Email</label>
+          <label class="form-control-label" for="email">البريد الالكتروني</label>
           <input
             type="email"
             class="form-control"
