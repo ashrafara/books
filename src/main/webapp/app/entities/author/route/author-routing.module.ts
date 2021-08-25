@@ -6,6 +6,7 @@ import { AuthorComponent } from '../list/author.component';
 import { AuthorDetailComponent } from '../detail/author-detail.component';
 import { AuthorUpdateComponent } from '../update/author-update.component';
 import { AuthorRoutingResolveService } from './author-routing-resolve.service';
+import {AuthorAboutComponent} from "../about/author-about.component";
 
 const authorRoute: Routes = [
   {
@@ -36,6 +37,10 @@ const authorRoute: Routes = [
       author: AuthorRoutingResolveService,
     },
     canActivate: [UserRouteAccessService],
+  },
+  {
+    path: 'about',
+    component: AuthorAboutComponent,
   },
 ];
 

@@ -9,13 +9,14 @@
       </button>
 
       <button
+        *jhiHasAnyAuthority="['ROLE_AUTHOR','ROLE_ADMIN']"
         id="jh-create-entity"
         data-cy="entityCreateButton"
         class="btn btn-primary jh-create-entity create-book"
         [routerLink]="['/book/new']"
       >
         <fa-icon icon="plus"></fa-icon>
-        <span> انشاء جدول جديد </span>
+        <span> انشاء كتاب جديد </span>
       </button>
     </div>
   </h2>

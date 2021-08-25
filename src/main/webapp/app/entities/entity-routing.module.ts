@@ -13,7 +13,7 @@ import { RouterModule } from '@angular/router';
         path: 'author',
         data: { pageTitle: 'Authors' },
         loadChildren: () => import('./author/author.module').then(m => m.AuthorModule),
-      },
+      }
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

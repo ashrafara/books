@@ -2,6 +2,8 @@ package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.Author;
 import com.mycompany.myapp.repository.AuthorRepository;
+import com.mycompany.myapp.security.AuthoritiesConstants;
+import com.mycompany.myapp.security.SecurityUtils;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -154,6 +156,9 @@ public class AuthorResource {
     @GetMapping("/authors")
     public List<Author> getAllAuthors() {
         log.debug("REST request to get all Authors");
+        if(SecurityUtils.hasCurrentUserThisAuthority(AuthoritiesConstants.AUTHOR)){
+
+        }
         return authorRepository.findAll();
     }
 
@@ -178,8 +183,9 @@ public class AuthorResource {
      */
     @DeleteMapping("/authors/{id}")
     public ResponseEntity<Void> deleteAuthor(@PathVariable Long id) {
-        log.debug("REST request to delete Author : {}", id);
-        authorRepository.deleteById(id);
+        if(SecurityUtils.hasCurrentUserThisAuthority(AuthoritiesConstants.ADMIN)){
+            authorRepository.deleteById(id);
+        }
         return ResponseEntity
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))

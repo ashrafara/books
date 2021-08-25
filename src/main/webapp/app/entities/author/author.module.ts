@@ -5,10 +5,11 @@ import { AuthorDetailComponent } from './detail/author-detail.component';
 import { AuthorUpdateComponent } from './update/author-update.component';
 import { AuthorDeleteDialogComponent } from './delete/author-delete-dialog.component';
 import { AuthorRoutingModule } from './route/author-routing.module';
+import {AuthorAboutComponent} from "./about/author-about.component";
 
 @NgModule({
   imports: [SharedModule, AuthorRoutingModule],
-  declarations: [AuthorComponent, AuthorDetailComponent, AuthorUpdateComponent, AuthorDeleteDialogComponent],
+  declarations: [AuthorComponent, AuthorDetailComponent, AuthorAboutComponent, AuthorUpdateComponent, AuthorDeleteDialogComponent],
   entryComponents: [AuthorDeleteDialogComponent],
 })
 export class AuthorModule {}
