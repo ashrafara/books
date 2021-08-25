@@ -1,22 +1,22 @@
-<div class="row justify-content-center">
+<div class="row justify-content-center" style="text-align: right">
   <div class="col-8">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="myUserLabel">Create or edit a User</h2>
+      <h2 id="myUserLabel">انشاء او تعديل مستخدم</h2>
 
       <div *ngIf="user">
         <jhi-alert-error></jhi-alert-error>
 
         <div class="form-group" [hidden]="!user.id">
-          <label>ID</label>
+          <label>ر.م</label>
           <input type="text" class="form-control" name="id" formControlName="id" readonly />
         </div>
 
         <div class="form-group">
-          <label class="form-control-label">Login</label>
+          <label class="form-control-label">اسم المستخدم</label>
           <input type="text" class="form-control" name="login" formControlName="login" />
 
           <div *ngIf="editForm.get('login')!.invalid && (editForm.get('login')!.dirty || editForm.get('login')!.touched)">
-            <small class="form-text text-danger" *ngIf="editForm.get('login')?.errors?.required"> This field is required. </small>
+            <small class="form-text text-danger" *ngIf="editForm.get('login')?.errors?.required"> مطلوب التعبئة </small>
 
             <small class="form-text text-danger" *ngIf="editForm.get('login')?.errors?.maxlength">
               This field cannot be longer than 50 characters.
@@ -29,7 +29,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label">First Name</label>
+          <label class="form-control-label">الاسم الاول</label>
           <input type="text" class="form-control" name="firstName" formControlName="firstName" />
 
           <div *ngIf="editForm.get('firstName')!.invalid && (editForm.get('firstName')!.dirty || editForm.get('firstName')!.touched)">
@@ -40,7 +40,7 @@
         </div>
 
         <div class="form-group">
-          <label>Last Name</label>
+          <label>اللقب</label>
           <input type="text" class="form-control" name="lastName" formControlName="lastName" />
 
           <div *ngIf="editForm.get('lastName')!.invalid && (editForm.get('lastName')!.dirty || editForm.get('lastName')!.touched)">
@@ -51,7 +51,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label">Email</label>
+          <label class="form-control-label">البريد الالكتروني</label>
           <input type="email" class="form-control" name="email" formControlName="email" />
 
           <div *ngIf="editForm.get('email')!.invalid && (editForm.get('email')!.dirty || editForm.get('email')!.touched)">
@@ -65,11 +65,11 @@
               This field is required to be at least 5 characters.
             </small>
 
-            <small class="form-text text-danger" *ngIf="editForm.get('email')?.errors?.email"> Your email is invalid. </small>
+            <small class="form-text text-danger" *ngIf="editForm.get('email')?.errors?.email"> بريدك الالكتروني غير موجود.</small>
           </div>
         </div>
 
-        <div class="form-check">
+        <div class="form-check" >
           <label class="form-check-label" for="activated">
             <input
               class="form-check-input"
@@ -93,11 +93,11 @@
 
       <div *ngIf="user">
         <button type="button" class="btn btn-secondary" (click)="previousState()">
-          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>الغاء</span>
         </button>
 
         <button type="submit" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
-          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>حذف</span>
         </button>
       </div>
     </form>

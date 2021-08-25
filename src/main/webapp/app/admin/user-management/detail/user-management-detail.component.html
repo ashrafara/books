@@ -2,7 +2,7 @@
   <div class="col-8">
     <div *ngIf="user">
       <h2>
-        <span>User</span> [<strong>{{ user.login }}</strong
+        <span>المستخدم</span> [<strong>{{ user.login }}</strong
         >]
       </h2>
 
@@ -14,28 +14,28 @@
           <span *ngIf="!user.activated" class="badge badge-danger">Deactivated</span>
         </dd>
 
-        <dt><span>First Name</span></dt>
+        <dt><span>الاسم الاول </span></dt>
         <dd>{{ user.firstName }}</dd>
 
-        <dt><span>Last Name</span></dt>
+        <dt><span>الاسم الاخير</span></dt>
         <dd>{{ user.lastName }}</dd>
 
-        <dt><span>Email</span></dt>
+        <dt><span>البريد الالكتروني</span></dt>
         <dd>{{ user.email }}</dd>
 
-        <dt><span>Created By</span></dt>
+        <dt><span>انشات بواسطة</span></dt>
         <dd>{{ user.createdBy }}</dd>
 
-        <dt><span>Created Date</span></dt>
+        <dt><span> تاريخ الانشاء</span></dt>
         <dd>{{ user.createdDate | date: 'dd/MM/yy HH:mm' }}</dd>
 
-        <dt><span>Last Modified By</span></dt>
+        <dt><span>عدلت بواسطة</span></dt>
         <dd>{{ user.lastModifiedBy }}</dd>
 
-        <dt><span>Last Modified Date</span></dt>
+        <dt><span>تاريخ التعديل</span></dt>
         <dd>{{ user.lastModifiedDate | date: 'dd/MM/yy HH:mm' }}</dd>
 
-        <dt><span>Profiles</span></dt>
+        <dt><span>الصلاحيات</span></dt>
         <dd>
           <ul class="list-unstyled">
             <li *ngFor="let authority of user.authorities">
@@ -45,7 +45,7 @@
         </dd>
       </dl>
 
-      <button type="submit" routerLink="../../" class="btn btn-info"><fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span></button>
+      <button type="submit" routerLink="../../" class="btn btn-info"><fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>للخلف</span></button>
     </div>
   </div>
 </div>

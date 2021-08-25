@@ -1,6 +1,6 @@
-<form *ngIf="author" name="deleteForm" (ngSubmit)="confirmDelete(author.id!)">
+<form *ngIf="author" name="deleteForm" (ngSubmit)="confirmDelete(author.id!)" style="text-align: right">
   <div class="modal-header">
-    <h4 class="modal-title" data-cy="authorDeleteDialogHeading">Confirm delete operation</h4>
+    <h4 class="modal-title" data-cy="authorDeleteDialogHeading">تاكيد الحذف</h4>
 
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button>
   </div>
@@ -8,16 +8,16 @@
   <div class="modal-body">
     <jhi-alert-error></jhi-alert-error>
 
-    <p id="jhi-delete-author-heading">Are you sure you want to delete this Author?</p>
+    <p id="jhi-delete-author-heading">هل متاكد من الحذف؟</p>
   </div>
 
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
-      <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+      <fa-icon icon="ban"></fa-icon>&nbsp;<span>الغاء</span>
     </button>
 
     <button id="jhi-confirm-delete-author" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
-      <fa-icon icon="times"></fa-icon>&nbsp;<span>Delete</span>
+      <fa-icon icon="times"></fa-icon>&nbsp;<span>حذف</span>
     </button>
   </div>
 </form>
