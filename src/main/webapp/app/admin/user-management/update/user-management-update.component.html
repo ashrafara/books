@@ -18,7 +18,7 @@
           <div *ngIf="editForm.get('login')!.invalid && (editForm.get('login')!.dirty || editForm.get('login')!.touched)">
             <small class="form-text text-danger" *ngIf="editForm.get('login')?.errors?.required"> مطلوب التعبئة </small>
 
-            <small class="form-text text-danger" *ngIf="editForm.get('login')?.errors?.maxlength">
+            <small class="formtext text-danger" *ngIf="editForm.get('login')?.errors?.maxlength">
               This field cannot be longer than 50 characters.
             </small>
 
@@ -97,7 +97,7 @@
         </button>
 
         <button type="submit" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
-          <fa-icon icon="save"></fa-icon>&nbsp;<span>حذف</span>
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>تعديل</span>
         </button>
       </div>
     </form>

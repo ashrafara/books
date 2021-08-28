@@ -26,6 +26,7 @@
           </span>
         </a>
       </li>
+
       <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
       <li
         *ngSwitchCase="true"
@@ -57,15 +58,27 @@
           <li>
             <a
               class="dropdown-item"
-              routerLink="author"
+              routerLink="author/about"
               routerLinkActive="active"
               [routerLinkActiveOptions]="{ exact: true }"
               (click)="collapseNavbar()"
             >
               <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span>المؤلفين</span>
+              <span>حول</span>
             </a>
           </li>
+          <li>
+          <a
+            class="dropdown-item"
+            routerLink="author"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            (click)="collapseNavbar()"
+          >
+            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+            <span>المؤلفين</span>
+          </a>
+        </li>
           <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
         </ul>
       </li>
