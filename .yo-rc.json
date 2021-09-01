@@ -44,6 +44,9 @@
     "clientThemeVariant": "",
     "languages": ["en", "fr"],
     "entities": ["Book", "Author"],
-    "lastLiquibaseTimestamp": 1629333779000
+    "lastLiquibaseTimestamp": 1629333779000,
+    "herokuAppName": "boks",
+    "herokuDeployType": "git",
+    "herokuJavaVersion": "11"
   }
 }
